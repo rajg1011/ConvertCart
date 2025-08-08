@@ -1,14 +1,15 @@
-# ConverCart Assignment
+# ConvertCart Assignment
 
 ## Project Overview
 
-It is an assignment given by **ConverCart**. The project demonstrates full stack capabilities using a React-based frontend and Node.js (Express + TypeScript) backend. It integrates with WooCommerce APIs, ingests product data, and supports segmentation features with robust syncing and scheduled jobs.
+It is an assignment given by **ConvertCart**. The project demonstrates full stack capabilities using a React-based frontend and Node.js (Express + TypeScript) backend. It integrates with WooCommerce APIs, ingests product data, and supports segmentation features with robust syncing and scheduled jobs.
 
 ---
 
 ## Project Structure
 
-convercart-assignment/
+```
+|
 ├── client/ # Frontend
 │ ├── main.tsx # Entry file
 │ └── src/
@@ -24,6 +25,7 @@ convercart-assignment/
 │ ├── routes/ # API route handlers
 │ ├── utils/ # Utility helpers
 │ └── cronJobs/ # Scheduled tasks
+```
 
 ---
 
@@ -125,9 +127,11 @@ convercart-assignment/
 
 ## Segmentation Example
 
-`price>10`
-`category = Clothing`
-`stock_status = instock`
+```
+price>10
+category = Clothing
+stock_status = instock
+```
 
 Sample logic:  
 Update all products where `price > 10` **and** `category = Clothing` **and** `stock_status = instock`.
