@@ -5,16 +5,16 @@ const WooCommerceRestApi = WooCommerceRestApiModule.default;
 dotenv.config();
 if (
   !process.env.WOOCOMMERCE_BASE_URL ||
-  !process.env.WOOCOMMERCE_CONSUMER_KEY ||
-  !process.env.WOOCOMMERCE_CONSUMER_SECRET
+  !process.env.WOOCOMMERCE_CUSTOMER_SECRET ||
+  !process.env.WOOCOMMERCE_CUSTOMER_KEY
 ) {
   throw new Error("Missing WooCommerce API credentials");
 }
 
 const WooCommerce = new WooCommerceRestApi({
   url: process.env.WOOCOMMERCE_BASE_URL,
-  consumerKey: process.env.WOOCOMMERCE_CONSUMER_KEY,
-  consumerSecret: process.env.WOOCOMMERCE_CONSUMER_SECRET,
+  consumerKey: process.env.WOOCOMMERCE_CUSTOMER_KEY,
+  consumerSecret: process.env.WOOCOMMERCE_CUSTOMER_SECRET,
   version: "wc/v3",
   timeout: 60000,
 });
@@ -47,15 +47,11 @@ const fetchAllProducts = async () => {
     let per_page = 100;
     let allProducts = [];
     let totalPages = 1;
-
     do {
-      const response = await WooCommerce.get(
-        `${process.env.WOOCOMMERCE_BASE_URL}/wp-json/wc/v3/products`,
-        {
-          per_page: per_page,
-          page: page,
-        }
-      );
+      const response = await WooCommerce.get("products", {
+        per_page: per_page,
+        page: page,
+      });
       const products = response.data;
 
       allProducts.push(...products);
@@ -67,15 +63,9 @@ const fetchAllProducts = async () => {
 
     return allProducts;
   } catch (err) {
-    if (err instanceof Error) {
-      return {
-        message: "Products ingestion failed",
-        error: err.message,
-      };
-    }
-    return {
-      message: "Products ingestion failed",
-    };
+    throw new Error(
+      `Fetching products failed: ${(err as Error)?.message || err}`
+    );
   }
 };
 
@@ -86,15 +76,9 @@ const ingestProducts = async () => {
     await Product.bulkWrite(operations, { ordered: false });
     return { message: "Products ingested successfully" };
   } catch (err) {
-    if (err instanceof Error) {
-      return {
-        message: "Products ingestion failed",
-        error: err.message,
-      };
-    }
-    return {
-      message: "Products ingestion failed",
-    };
+    throw new Error(
+      `Products ingestion failed: ${(err as Error)?.message || err}`
+    );
   }
 };
 

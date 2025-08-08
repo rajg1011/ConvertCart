@@ -5,7 +5,8 @@ const getProducts = async (req: Request, res: Response) => {
   try {
     const products = await Product.find();
     if (!products) {
-      return res.status(404).json({ error: "No products found" });
+      res.status(404).json({ error: "No products found" });
+      return;
     }
     res.status(200).json(products);
   } catch (err) {

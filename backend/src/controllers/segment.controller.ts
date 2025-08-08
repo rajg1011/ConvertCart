@@ -6,7 +6,8 @@ import { ZodError } from "zod";
 const evaluateSegment = async (req: Request, res: Response) => {
   try {
     if (!req.body.userRules) {
-      return res.status(400).json({ message: "No rules provided" });
+      res.status(400).json({ message: "No rules provided" });
+      return;
     }
     const query = parseRules(req.body.userRules);
     const results = await Product.find(query);
@@ -16,9 +17,10 @@ const evaluateSegment = async (req: Request, res: Response) => {
     });
   } catch (err) {
     if (err instanceof ZodError || err instanceof Error) {
-      return res.status(400).json({
+      res.status(400).json({
         message: "Invalid rules format",
       });
+      return;
     }
 
     res.status(500).json({
