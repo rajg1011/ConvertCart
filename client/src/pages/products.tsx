@@ -12,7 +12,7 @@ const Products: React.FC = () => {
       setLoadingData(true);
       setError(false);
       try {
-        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/product`);
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/products`);
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }

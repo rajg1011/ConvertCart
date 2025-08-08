@@ -27,7 +27,7 @@ const operationsOnDB = (products: any[]) => {
         $set: {
           id: product.id,
           title: product.name,
-          price: product.price,
+          price: parseFloat(product.price),
           stock_status: product.stock_status,
           stock_quantity: product.stock_quantity,
           category: product.categories?.[0]?.name,

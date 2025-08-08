@@ -3,21 +3,26 @@ interface ButtonProps {
   className?: string;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
+
 const Button: React.FC<ButtonProps> = ({
   children,
-  className,
+  className = '',
   onClick,
-  type,
+  type = 'button',
+  disabled = false,
 }) => {
   return (
     <button
       className={
-        `py-2 rounded-lg transition font-semibold whitespace-nowrap  cursor-pointer ` +
-        className
+        `py-2 rounded-lg transition font-semibold whitespace-nowrap ${
+          disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+        } ${className}`
       }
       onClick={onClick}
       type={type}
+      disabled={disabled}
     >
       {children}
     </button>

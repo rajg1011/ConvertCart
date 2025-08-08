@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
     unique: true,
   },
   title: String,
-  price: String,
+  price: Number,
   stock_status: {
     type: String,
     enum: ["instock", "outofstock"],

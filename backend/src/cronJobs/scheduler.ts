@@ -13,6 +13,6 @@ async function runCronJob() {
   }
 }
 
-cron.schedule("0 3 * * 0", runCronJob);
+cron.schedule("0 0 * * *", runCronJob);
 //for running manually
 if (process.argv.includes("manual")) runCronJob();
