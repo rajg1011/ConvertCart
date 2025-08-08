@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-It is an assignment given by **ConvertCart**. The project demonstrates full stack capabilities using a React-based frontend and Node.js (Express + TypeScript) backend. It integrates with WooCommerce APIs, ingests product data, and supports segmentation features with robust syncing and scheduled jobs.
+It is an assignment given by **ConvertCart**. The project demonstrates full stack capabilities using a React-based frontend and Node.js (Express + TypeScript) backend. It integrates with WooCommerce APIs to ingest and manage product data, supports business segmentation features, and ensures robust data synchronization. WooCommerce data is automatically synced with the project’s database at scheduled intervals via a backend cron job, keeping your local product catalog up-to-date with the external store.
 
 ---
 
