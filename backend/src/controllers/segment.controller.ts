@@ -10,11 +10,8 @@ const evaluateSegment = async (req: Request, res: Response) => {
       return;
     }
     const query = parseRules(req.body.userRules);
-    const results = await Product.find(query);
-    res.status(200).json({
-      message: "Segment evaluation successful",
-      results,
-    });
+    const results = await Product.find(query).select("-_id -__v -id");
+    res.status(200).json(results);
   } catch (err) {
     if (err instanceof ZodError || err instanceof Error) {
       res.status(400).json({
@@ -27,6 +24,6 @@ const evaluateSegment = async (req: Request, res: Response) => {
       message: "Segment evaluation failed",
     });
   }
-};
+};  
 
 export default evaluateSegment;
