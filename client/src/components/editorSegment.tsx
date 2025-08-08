@@ -8,7 +8,7 @@ const SegmentEditor: React.FC = () => {
   const [loadingData, setLoadingData] = useState(false);
   const [error, setError] = useState(false);
   const handleSubmit = async () => {
-    try {
+    try { 
       setLoadingData(true);
       setError(false);
       const res = await fetch(
